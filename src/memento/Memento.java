@@ -3,7 +3,13 @@ package memento;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
-
+import java.io.File;
+import java.io.IOException;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 
 public class Memento extends Frame{
@@ -23,6 +29,10 @@ public class Memento extends Frame{
 	private static int[] codeStart={27,26,19,20,29,34,43,44,37};
 	private static int[] codeStep={26,27,28,29,35,36};
 	private static int[] codeWord={8,9,10,11,12,13,14,15};
+	private static Clip clip1;   //bmg
+	private static Clip clip2;   //button
+	private static Clip clip3;   //do you hear
+	private static Clip clip4;   //fail sound
 	
 	Memento(){}
 
@@ -66,7 +76,10 @@ public class Memento extends Frame{
 	}
 	
 	public void failAnimation(){
-	    for(int i=0;i<i_NumOfRow*i_NumOfColumn;i++){
+		clip1.stop();
+		clip4.setMicrosecondPosition(0);
+	    clip4.start();
+		for(int i=0;i<i_NumOfRow*i_NumOfColumn;i++){
 		    pl.get(i).clearUp();
 		}
 		pl.get(codeWord[1]).setText("Lost");
@@ -133,7 +146,7 @@ public class Memento extends Frame{
 				break;
 			}
 			case 4:{
-				interval=3000;
+				interval=2000;
 				pl.get(codeWord[1]).setText("See");
 				pl.get(codeWord[2]).setText("What");
 				pl.get(codeWord[3]).setText("You");
@@ -144,7 +157,7 @@ public class Memento extends Frame{
 				break;	
 			}
 			case 5:{
-				interval=3000;
+				interval=2000;
 				pl.get(codeWord[1]).setText("");
 				pl.get(codeWord[2]).setText("Not");
 				pl.get(codeWord[3]).setText("Too");
@@ -155,7 +168,7 @@ public class Memento extends Frame{
 				break;	
 			}
 			case 6:{
-				interval=3000;
+				interval=2500;
 				pl.get(codeWord[1]).setText("");
 				pl.get(codeWord[2]).setText("");
 				pl.get(codeWord[3]).setText("Taste");
@@ -166,7 +179,7 @@ public class Memento extends Frame{
 				break;		
 			}
 			case 7:{
-				interval=4000;
+				interval=3000;
 				pl.get(codeWord[1]).setText("");
 				pl.get(codeWord[2]).setText("OK");
 				pl.get(codeWord[3]).setText(",");
@@ -178,7 +191,7 @@ public class Memento extends Frame{
 			}
 			
 			case 8:{
-				interval=4000;
+				interval=3000;
 				pl.get(codeWord[1]).setText("");
 				pl.get(codeWord[2]).setText("Want");
 				pl.get(codeWord[3]).setText("Some");
@@ -190,7 +203,7 @@ public class Memento extends Frame{
 			}
 			
 			case 9:{
-				interval=5000;
+				interval=4000;
 				pl.get(codeWord[1]).setText("");
 				pl.get(codeWord[2]).setText("You");
 				pl.get(codeWord[3]).setText("Almost");
@@ -201,7 +214,9 @@ public class Memento extends Frame{
 				break;	
 			}
 			
-			case 10:{
+			case 10:{				
+				clip1.stop();
+			    clip3.start();
 				interval=5000;
 				pl.get(codeWord[1]).setText("You");
 				pl.get(codeWord[2]).setText("Really");
@@ -234,6 +249,7 @@ public class Memento extends Frame{
 				pl.get(37).setFont(new Font("Comic Sans MS", Font.BOLD,29));
 				pl.get(38).setFont(new Font("Comic Sans MS", Font.BOLD,29));
 				pl.get(39).setFont(new Font("Comic Sans MS", Font.BOLD,29));
+
 				pl.get(16).setText("H");
 				pl.get(17).setText("A");
 				pl.get(18).setText("P");
@@ -255,7 +271,19 @@ public class Memento extends Frame{
 				pl.get(37).setText("I");
 				pl.get(38).setText("S");
 				pl.get(39).setText("!!!");
-				Thread.sleep(100000);
+				Thread.sleep(70000);
+				break;	
+			}
+			
+			case 11:{
+				interval=4000;
+				pl.get(codeWord[1]).setText("");
+				pl.get(codeWord[2]).setText("You");
+				pl.get(codeWord[3]).setText("Always");
+				pl.get(codeWord[4]).setText("Can");
+				pl.get(codeWord[5]).setText("Do");
+				pl.get(codeWord[6]).setText("More:-)");
+				Thread.sleep(1000+intervalMinus);
 				break;	
 			}
 		}
@@ -346,6 +374,8 @@ public class Memento extends Frame{
 		
 		if(chipLeft==0){       
 			game.failAnimation();
+			clip1.setMicrosecondPosition(0);
+			clip1.loop(Clip.LOOP_CONTINUOUSLY);
 			resetGame();
 			return;
 		}
@@ -364,7 +394,41 @@ public class Memento extends Frame{
 		setBoard();
 	}
 	
-	public static void main(String[] args) {
+	public void initializeSound(){
+		try{
+		String soundName ="rsc/pol.wav";    
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName));
+		clip1 = AudioSystem.getClip();
+		clip1.open(audioInputStream);
+		clip1.loop(Clip.LOOP_CONTINUOUSLY);
+		soundName="rsc/button.wav";
+        audioInputStream = AudioSystem.getAudioInputStream(new File(soundName));
+		clip2 = AudioSystem.getClip();
+		clip2.open(audioInputStream);
+		soundName="rsc/do.wav";
+        audioInputStream = AudioSystem.getAudioInputStream(new File(soundName));
+		clip3 = AudioSystem.getClip();
+		clip3.open(audioInputStream);
+		soundName="rsc/fail.wav";
+        audioInputStream = AudioSystem.getAudioInputStream(new File(soundName));
+		clip4 = AudioSystem.getClip();
+		clip4.open(audioInputStream);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void makeSound(int i){
+		if(i==1) clip1.stop();
+		else{
+			clip2.setMicrosecondPosition(0);
+		    clip2.start();
+		}
+	}
+	
+	public static void main(String[] args){
+		game.initializeSound();
 		game.setGame();
 		game.startAnimation();
 		game.startGame();
@@ -429,8 +493,12 @@ class Piece extends JButton implements ActionListener{
 	}
 	
 	public void noticeMemento(int i){
-		if(i==2) Memento.onlineJudge();   //any other way?
+		if(i==2){
+			Memento.makeSound(2);
+			Memento.onlineJudge();   //any other way?
+		}
 		else if(i==1){
+			Memento.makeSound(2);
 			Memento.changeState(1);
 			Memento.changeInterval(100);
 		}

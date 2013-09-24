@@ -1,15 +1,11 @@
 package memento;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.util.*;
 import java.io.File;
-import java.io.IOException;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 
 public class Memento extends Frame{
@@ -205,84 +201,35 @@ public class Memento extends Frame{
 			case 9:{
 				interval=4000;
 				pl.get(codeWord[1]).setText("");
-				pl.get(codeWord[2]).setText("You");
-				pl.get(codeWord[3]).setText("Almost");
-				pl.get(codeWord[4]).setText("There");
-				pl.get(codeWord[5]).setText("!..");
+				pl.get(codeWord[2]).setText("Ah!");
+				pl.get(codeWord[3]).setText("I");
+				pl.get(codeWord[4]).setText("dare");
+				pl.get(codeWord[5]).setText("you");
 				pl.get(codeWord[6]).setText("");
 				Thread.sleep(1000+intervalMinus);
 				break;	
 			}
 			
 			case 10:{				
-				clip1.stop();
-			    clip3.start();
-				interval=5000;
-				pl.get(codeWord[1]).setText("You");
-				pl.get(codeWord[2]).setText("Really");
-				pl.get(codeWord[3]).setText("Know");
-				pl.get(codeWord[4]).setText("What");
-				pl.get(codeWord[5]).setText("To");
-				pl.get(codeWord[6]).setText("Do");
-				pl.get(codeWord[7]).setText("?...");
-				Thread.sleep(5000);
-				for(int i=0;i<i_NumOfRow*i_NumOfColumn;i++){
-					pl.get(i).clearUp();
-				}
-				pl.get(16).setFont(new Font("Comic Sans MS", Font.BOLD,29));
-				pl.get(17).setFont(new Font("Comic Sans MS", Font.BOLD,29));
-				pl.get(18).setFont(new Font("Comic Sans MS", Font.BOLD,29));
-				pl.get(19).setFont(new Font("Comic Sans MS", Font.BOLD,29));
-				pl.get(20).setFont(new Font("Comic Sans MS", Font.BOLD,29));
-				pl.get(23).setFont(new Font("Comic Sans MS", Font.BOLD,29));
-				pl.get(24).setFont(new Font("Comic Sans MS", Font.BOLD,29));
-				pl.get(25).setFont(new Font("Comic Sans MS", Font.BOLD,29));
-				pl.get(26).setFont(new Font("Comic Sans MS", Font.BOLD,29));
-				pl.get(27).setFont(new Font("Comic Sans MS", Font.BOLD,29));
-				pl.get(28).setFont(new Font("Comic Sans MS", Font.BOLD,29));
-				pl.get(29).setFont(new Font("Comic Sans MS", Font.BOLD,29));
-				pl.get(30).setFont(new Font("Comic Sans MS", Font.BOLD,29));
-				pl.get(31).setFont(new Font("Comic Sans MS", Font.BOLD,29));
-				pl.get(34).setFont(new Font("Comic Sans MS", Font.BOLD,29));
-				pl.get(35).setFont(new Font("Comic Sans MS", Font.BOLD,29));
-				pl.get(36).setFont(new Font("Comic Sans MS", Font.BOLD,29));
-				pl.get(37).setFont(new Font("Comic Sans MS", Font.BOLD,29));
-				pl.get(38).setFont(new Font("Comic Sans MS", Font.BOLD,29));
-				pl.get(39).setFont(new Font("Comic Sans MS", Font.BOLD,29));
-
-				pl.get(16).setText("H");
-				pl.get(17).setText("A");
-				pl.get(18).setText("P");
-				pl.get(19).setText("P");
-				pl.get(20).setText("Y");
-				Thread.sleep(2000);
-				pl.get(24).setText("B");
-				pl.get(25).setText("I");
-				pl.get(26).setText("R");
-				pl.get(27).setText("T");
-				pl.get(28).setText("H");
-				pl.get(29).setText("D");
-				pl.get(30).setText("A");
-				pl.get(31).setText("Y");
-				Thread.sleep(1000);
-				pl.get(34).setText("L");
-				pl.get(35).setText("O");
-				pl.get(36).setText("U");
-				pl.get(37).setText("I");
-				pl.get(38).setText("S");
-				pl.get(39).setText("!!!");
-				Thread.sleep(70000);
+				interval=4000;
+				pl.get(codeWord[1]).setText("I");
+				pl.get(codeWord[2]).setText("Never");
+				pl.get(codeWord[3]).setText("Expected");
+				pl.get(codeWord[4]).setText("This");
+				pl.get(codeWord[5]).setText("!..");
+				pl.get(codeWord[6]).setText("");
+				Thread.sleep(1000+intervalMinus);
 				break;	
 			}
 			
 			case 11:{
 				interval=4000;
 				pl.get(codeWord[1]).setText("");
-				pl.get(codeWord[2]).setText("You");
-				pl.get(codeWord[3]).setText("Always");
-				pl.get(codeWord[4]).setText("Can");
-				pl.get(codeWord[5]).setText("Do");
-				pl.get(codeWord[6]).setText("More:-)");
+				pl.get(codeWord[2]).setText("Easy");
+				pl.get(codeWord[3]).setText("-");
+				pl.get(codeWord[4]).setText("peasy");
+				pl.get(codeWord[5]).setText("");
+				pl.get(codeWord[6]).setText("");
 				Thread.sleep(1000+intervalMinus);
 				break;	
 			}
@@ -433,91 +380,4 @@ public class Memento extends Frame{
 		game.startAnimation();
 		game.startGame();
 	}
-}
-
-class Piece extends JButton implements ActionListener{
-	private int mark=0;   //mark==1 when it is painted blue, 2 used as a start button
-	private Integer i_serialNum;
-	private boolean clickable=false;
-	
-	
-	Piece(int i){
-		i_serialNum=i;
-		setBackground(new Color(230, 126, 34));  //green rgb(46, 204, 113) pumpkin rgb(211, 84, 0) blue (52, 152, 219)
-		setBorder(BorderFactory.createLineBorder(new Color(211, 84, 0),3)); //carrot rgb(230, 126, 34)
-		this.addActionListener(this);
-		setFont(new Font("Comic Sans MS", Font.BOLD,20));
-		setFocusPainted(false);   //to diminish the focus
-//		setText(i_serialNum.toString());
-	}
-	
-	public void clearUp(){
-		mark=0;
-		clickable=false;
-		setText("");
-//		changeColor(1);
-		setBackground(new Color(230, 126, 34));
-		makeUnClickable();
-	}
-	
-	public void actionPerformed(ActionEvent ae){
-        if(mark==1) return;    //a very simple solution, disable this chip when it has been blued
-		SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
-		        @Override
-		        public Void doInBackground() {
-		        	if(mark==2) noticeMemento(1);
-		        	if(clickable){
-		        		noticeMemento(2);
-		        	}
-		        	return null;
-		        }
-		        @Override
-		        protected void done() {
-		        }
-		    };
-		worker.execute();   //remeber to execute the worker
-		if(clickable){
-        setBackground(new Color(52, 152, 219)); 
-        mark=1;
-		}
-	}
-	
-	public void changeColor(int i){    //when i=1, orange; 2, blue
-		if(i==1) {setBackground(new Color(230, 126, 34));}
-		else if(i==2) setBackground(new Color(52, 152, 219)); 	
-
-	}
-	
-	public void setMark(int i){
-		mark=i;
-	}
-	
-	public void noticeMemento(int i){
-		if(i==2){
-			Memento.makeSound(2);
-			Memento.onlineJudge();   //any other way?
-		}
-		else if(i==1){
-			Memento.makeSound(2);
-			Memento.changeState(1);
-			Memento.changeInterval(100);
-		}
-	}
-	
-	public int getMark(){
-		return mark;
-	}
-	
-	public void makeClickable(){
-		clickable=true;
-	}
-	
-	public void makeUnClickable(){
-		clickable=false;
-	}
-	
-	public boolean isMarkedBlue(){
-		return mark==1;
-	}
-	
 }

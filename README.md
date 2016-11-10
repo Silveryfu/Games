@@ -3,4 +3,4 @@ Memento
 
 -Find zipped file under /OK2Play
 
--Memento 1.0L on release 9/23/2013
+-This is a birthday gift for my friend Louis. For him to improve his bad memory and to match up with his good sense of humor.
